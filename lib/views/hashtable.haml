@@ -1,0 +1,10 @@
+%h1= @title
+%table
+  - @myhash.keys.sort.each do |k| 
+    %tr
+      %td
+        %tt
+          %b= k
+      %td
+        %tt
+          = @myhash[k]

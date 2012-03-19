@@ -1,0 +1,4 @@
+*.war
+.rbenv-*
+.DS_Store
+.gitconfig

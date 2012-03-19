@@ -1,0 +1,6 @@
+%h1= MAINTITLE
+%ul
+  - @links.each do |l|
+    %li
+      %a{:href => l[0]}
+        = l[1]
