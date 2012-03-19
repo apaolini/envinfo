@@ -15,11 +15,23 @@ Package it in a .war file, deploy it and you'll be able to see, via a web interf
 
 ...even without the ability to put hands on the machine running it.
 
-Packaging
----------
-
 Using
 -----
+
+You need jruby and the gems specified in the included Gemfile
+
+### Testing ###
+
+ * Run rackup in home of the project directory
+ * Connect with a browser to http://127.0.0.1:9292/
+
+ You'll be able to get some info about the environment, but not the one specific for J2EE
+ environments.
+
+### Packaging ###
+
+ 1. Create the envinfo.war file running `warbler`
+ 2. Deploy it to tour favorite Java Application Server
 
 Adding tests
 ------------

@@ -2,3 +2,4 @@
 .rbenv-*
 .DS_Store
 .gitconfig
+.bundle

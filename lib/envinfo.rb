@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 
 #
-# Environment info gatherer.
+# J2EE Environment info gatherer.
 # Crude hack by Andrea Paolini <ap@nuxi.it>
 # (c) 2012 Andrea Paolini. All Rights Reserved
 # See LICENSE.txt file for usage terms.
