@@ -15,6 +15,12 @@ require 'yaml'
 
 MAINTITLE = "J2EE Environment info"
 
+# Work around issues for context root accessed without
+# final / when deployed as war
+get '' do
+  redirect request.env['REQUEST_URI'] + '/'
+end
+
 get '/' do
   @links = [
     ['path'   ,  'Process PATH'],
