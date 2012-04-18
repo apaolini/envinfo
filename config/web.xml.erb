@@ -9,6 +9,10 @@
   </context-param>
 <% end %>
 
+  <listener>
+    <listener-class><%= webxml.servlet_context_listener %></listener-class>
+  </listener>
+
   <servlet>
     <servlet-name>Rails</servlet-name>
     <servlet-class>org.jruby.rack.RackServlet</servlet-class>
@@ -17,10 +21,6 @@
     <servlet-name>Rails</servlet-name>
     <url-pattern>/*</url-pattern>
   </servlet-mapping>
-
-  <listener>
-    <listener-class><%= webxml.servlet_context_listener %></listener-class>
-  </listener>
 
 <% if webxml.jndi then [webxml.jndi].flatten.each do |jndi| %>
   <resource-ref>
