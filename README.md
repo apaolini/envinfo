@@ -15,6 +15,12 @@ Package it in a .war file, deploy it and you'll be able to see, via a web interf
 
 ...even without the ability to put hands on the machine running it.
 
+It has been tested on:
+
+ * Jboss 5.1
+ * WebLogic Server 11g
+ * Websphere Application Server 8
+ 
 Using
 -----
 
@@ -31,7 +37,7 @@ You need jruby and the gems specified in the included Gemfile
 ### Packaging ###
 
  1. Create the envinfo.war file running `warbler`
- 2. Deploy it to tour favorite Java Application Server
+ 2. Deploy it to your favorite Java Application Server
 
 Adding tests
 ------------
@@ -42,6 +48,9 @@ quality of the web output.
 
 Contributing
 ------------
+
+You've added some function? Fixed some bug? Cleaned up the code? Send me a pull request
+and if possible I'll be happy to merge your changes.
 
 Notes
 -----
