@@ -13,8 +13,11 @@ require 'java'
 require 'fileutils'
 require 'yaml'
 require 'pp'
+require "sinatra/cookies"
 
 MAINTITLE = "J2EE Environment info"
+
+# use Rack::Session::Cookie, :key => 'JSESSIONID'
 
 #
 # Helper / utility functions
@@ -50,7 +53,9 @@ get '/' do
     ['umask'  ,  'Umask'],
     ['datasource', 'Datasource Driver info'],
     ['readfile', 'Read a file from local FileSystem'],
-    ['writefile', 'Try creating and writing to a local file']
+    ['writefile', 'Try creating and writing to a local file'],
+    ['readcookies', 'Cookies received from browser'],
+    ['setjsessionid', 'Send a random JSESSIONID cookie']
   ]
   haml :index
 end
@@ -182,6 +187,20 @@ post '/writefile' do
     @filecontents << "\nERROR: #{e.class} #{e.exception}"
   end
   haml :filecontents
+end
+
+get '/setjsessionid' do
+  @title = "Sent a JSESSIONID cookie"
+  cookies[:JSESSIONID] = "jsessionid-#{Time.now.to_i}"
+  @myhash = {}
+  @myhash["JSESSIONID"] = cookies[:JSESSIONID]
+  haml :hashtable
+end
+
+get '/readcookies' do
+  @title = "Cookies received"
+  @myhash = cookies
+  haml :hashtable
 end
 
 ## END
