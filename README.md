@@ -39,8 +39,8 @@ You need jruby and the gems specified in the included Gemfile
  1. Create the envinfo.war file running `warbler`
  2. Deploy it to your favorite Java Application Server
 
-Adding tests
-------------
+Adding inspectors
+-----------------
 
 The design is really simple even if a bit crude; the aim is to be able to
 add any needed check with a few lines of ruby without caring too much about the
