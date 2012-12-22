@@ -17,7 +17,7 @@ Package it in a .war file, deploy it and you'll be able to see, via a web interf
 
 It has been tested on:
 
- * Jboss 5.1
+ * Jboss 5.1, 7.1.1
  * WebLogic Server 11g
  * Websphere Application Server 8
  

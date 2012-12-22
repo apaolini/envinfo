@@ -12,8 +12,26 @@ require 'haml'
 require 'java'
 require 'fileutils'
 require 'yaml'
+require 'pp'
 
 MAINTITLE = "J2EE Environment info"
+
+#
+# Helper / utility functions
+#
+helpers do
+
+  def prettyprint(obj)
+    if obj.is_a? String
+      obj
+    else
+      PP.pp obj, dump = ""
+      dump.chomp
+    end
+  end
+
+end
+
 
 # Work around issues for context root accessed without
 # final / when deployed as war
