@@ -1,0 +1,10 @@
+%h1= @title
+%form(action='#' method='POST')
+  JDBC Datasource JNDI
+  %input(type='text' name='jndi' value=@jndi)
+  %br
+  %input(type="radio" name="dbtype" value="oracle" checked)  Oracle
+  %br
+  %input(type="radio" name="dbtype" value="db2luw")  DB2 LUW 
+  %br
+  %input(type='submit')

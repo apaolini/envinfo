@@ -51,7 +51,7 @@ get '/' do
     ['reqenv' ,  'Request Environment'],
     ['pwd'    ,  'Current Directory'],
     ['umask'  ,  'Umask'],
-    ['datasource', 'Datasource Driver info'],
+    ['jdbc', 'JDBC Datasource test'],
     ['readfile', 'Read a file from local FileSystem'],
     ['writefile', 'Try creating and writing to a local file'],
     ['readcookies', 'Cookies received from browser'],
@@ -113,37 +113,45 @@ get '/umask' do
   haml :arrtable
 end
 
-get '/datasource' do
-  @title = "Datasource"
+get '/jdbc' do
+  @title = "JDBC Test"
   jndi ||= ""
-  haml :forminputjndi
+  haml :forminputjdbc
 end
 
-post '/datasource' do
+post '/jdbc' do
   import javax.naming.InitialContext
   import javax.naming.Context
 
-  @title = "Datasource Driver Version"
+  @title = "JDBC Test"
   @myhash = {}
 
   datasource_jndi = params[:jndi]
-  #datasource_jndi = "gate0Data"
   @myhash["Datasource"] = datasource_jndi
+  case params[:dbtype]
+  when "oracle"
+   sqlstmt = "select 'test OK' FROM DUAL"
+  when "db2luw"
+   sqlstmt = "select 'test OK' FROM SYSIBM.SYSDUMMY1"
+  end
 
   begin
     ic = InitialContext.new
     data_source = ic.lookup(datasource_jndi)
-    @myhash["Datasource lookup"] = data_source
     connection = data_source.getConnection
-    @myhash["Connection"] =  connection
-    dbmd = connection.getMetaData
-    @myhash["Driver Name"] = dbmd.getDriverName
-    @myhash["Driver Version"] =  dbmd.getDriverVersion
+    stmt = connection.createStatement
+    rs = stmt.executeQuery(sqlstmt)
+    while (rs.next) do
+      @myhash["Result"] = rs.getString(1)
+    end
+    rs.close
+    stmt.close
   rescue NativeException => ex
-    return "ERROR: cannot find or open datasource '#{datasource_jndi}'. Error message is: #{ex.message}"
+    return "ERROR: interacting with '#{datasource_jndi}': #{ex.message}"
   ensure
     connection.close
   end
+
   haml :hashtable
 end
 
