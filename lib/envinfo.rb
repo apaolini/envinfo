@@ -131,7 +131,7 @@ post '/jdbc' do
   case params[:dbtype]
   when "oracle"
    sqlstmt = "select 'test OK' FROM DUAL"
-  when "db2luw"
+  when "db2"
    sqlstmt = "select 'test OK' FROM SYSIBM.SYSDUMMY1"
   end
 
