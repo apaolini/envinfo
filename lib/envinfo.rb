@@ -89,7 +89,7 @@ end
 
 get '/java.class.path' do
   @title = "Java Class Path"
-  @myarr = java.lang.System.getProperties["java.class.path"].split(":")
+  @myarr = java.lang.System.getProperties["java.class.path"].split(java.lang.System.getProperties["path.separator"])
   haml :arrtable
 end
 
@@ -131,7 +131,7 @@ post '/jdbc' do
   case params[:dbtype]
   when "oracle"
    sqlstmt = "select 'test OK' FROM DUAL"
-  when "db2"
+  when "db2luw"
    sqlstmt = "select 'test OK' FROM SYSIBM.SYSDUMMY1"
   end
 
