@@ -14,6 +14,8 @@ require 'fileutils'
 require 'yaml'
 require 'pp'
 require "sinatra/cookies"
+require 'net/http'
+require 'uri'
 
 MAINTITLE = "J2EE Environment info"
 
@@ -55,7 +57,8 @@ get '/' do
     ['readfile', 'Read a file from local FileSystem'],
     ['writefile', 'Try creating and writing to a local file'],
     ['readcookies', 'Cookies received from browser'],
-    ['setjsessionid', 'Send a random JSESSIONID cookie']
+    ['setjsessionid', 'Send a random JSESSIONID cookie'],
+    ['curl', 'Get an URL']
   ]
   haml :index
 end
@@ -208,6 +211,30 @@ end
 get '/readcookies' do
   @title = "Cookies received"
   @myhash = cookies
+  haml :hashtable
+end
+
+get '/curl' do
+  @title = "Try getting this URL"
+  @url = ""
+  haml :formcurl
+end
+
+post '/curl' do
+  @myhash = Hash.new
+  url = params[:url]
+  @title = "Getting URL #{url}"
+  begin
+    uri = URI.parse(url)
+    response = Net::HTTP.get_response(uri)
+    @myhash["code"] = response.code
+    @myhash["body"] = response.body
+    @myhash["message"] = response.message
+  rescue Exception => e
+    @myhash["ERROR class"] =  e.class
+    @myhash["ERROR exception"] =  e.exception
+    @myhash["ERROR trace"] =  e.backtrace.join("\n")
+  end
   haml :hashtable
 end
 

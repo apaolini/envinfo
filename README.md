@@ -17,10 +17,10 @@ Package it in a .war file, deploy it and you'll be able to see, via a web interf
 
 It has been tested on:
 
- * Jboss 5.1, 7.1.1
+ * Jboss 5.1, 7.1.1, EAP 6.4, EAP 7, EAP 7.1
  * WebLogic Server 11g
  * Websphere Application Server 8
- 
+
 Using
 -----
 
@@ -38,6 +38,8 @@ You need jruby and the gems specified in the included Gemfile
 
  1. Create the envinfo.war file running `warbler`
  2. Deploy it to your favorite Java Application Server
+
+ You can also use `dockerbuild.sh` to build the war using Docker
 
 Adding inspectors
 -----------------
