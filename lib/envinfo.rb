@@ -58,7 +58,8 @@ get '/' do
     ['writefile', 'Try creating and writing to a local file'],
     ['readcookies', 'Cookies received from browser'],
     ['setjsessionid', 'Send a random JSESSIONID cookie'],
-    ['curl', 'Get an URL']
+    ['curl', 'Get an URL'],
+    ['stdouterr', 'Echo a test string to stdout and stderr'],
   ]
   haml :index
 end
@@ -236,6 +237,19 @@ post '/curl' do
     @myhash["ERROR trace"] =  e.backtrace.join("\n")
   end
   haml :hashtable
+end
+
+get '/stdouterr' do
+  @title = "Echo to standard output and standard error"
+  strso = "STDOUT envinfo test output"
+  strse = "STDERR envinfo test output"
+  STDOUT.puts strso
+  STDERR.puts strse
+  @myarr = Array.new
+  @myarr.push "Search for this output:"
+  @myarr.push strso
+  @myarr.push strse
+  haml :arrtable
 end
 
 ## END
