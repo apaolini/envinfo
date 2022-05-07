@@ -5,5 +5,6 @@
 docker run -it --rm --name envinfo-docker-builder \
   --volume $(pwd):/usr/src/envinfo:z \
   --workdir /usr/src/envinfo \
+  --ulimit nofile=122880:122880 \
   jruby:9-alpine sh -c 'bundle install && warble && echo DONE'
 
